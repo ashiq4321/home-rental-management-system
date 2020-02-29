@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>manager page</title>
+</head>
+
+<body>
+	<h2>Welcome home,<%= user.username%></h2>
+	<a href="/manager">Home</a>|
+	<a href="/logout">Logout</a><br><br>
+	<a href="/manager/profile/<%= user.username%>">Edit Profile</a><br>
+	<a href="/manager/pendingCustomers">Pending Customer</a><br>
+	<a href="/manager/pendingHouseowners">Pending Houseowners </a><br>
+	<a href="/manager/view_Available">House to-let</a><br>
+	<a href="/manager/view_Customers">Available customer</a><br>
+	<a href="/manager/view_Owners">House Owners</a><br>
+	<a href="/manager/view_Rented">Rented Apartments</a><br>
+	First Name: <%= user.fname %> <br>
+	Last Name: <%= user.lname %> <br>
+	Father's Name: <%= user.fathersName %> <br>
+	Assigned Area: <%= user.area %> <br>
+	Email: <%= user.email %> <br>
+	phone: <%= user.phone %> <br>
+	mail: <%= user.mail %> <br>
+	Password: <%= user.password %> <br>
+</body>
+
+</html>
