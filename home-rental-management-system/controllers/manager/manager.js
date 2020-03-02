@@ -17,7 +17,7 @@ router.get('/', function (req, res) {
 	});
 });
 
-router.get('/profile/:username', function (req, res) {
+router.get('/profile', function (req, res) {
 	managerModel.getByUname(req.cookies['uname'], function (result) {
 		res.render('manager/profile', {
 			user: result
@@ -25,27 +25,30 @@ router.get('/profile/:username', function (req, res) {
 	});
 
 });
-router.post('/profile/:username', function (req, res) {
+router.post('/profile', function (req, res) {
 	if (req.body.password == req.body.cpassword) {
 		var user = {
 			fname: req.body.fname,
 			lname: req.body.lname,
-			username: req.params.username,
+			username: req.body.uname,
 			fathersName: req.body.fathersName,
 			email: req.body.email,
 			phone: req.body.phone,
-			nid: req.body.type,
+			nid: req.body.nid,
 			password: req.body.password,
 			area: req.body.area
 		};
 
 		managerModel.update(user, function (status) {
+			console.log(user);
 			if (status) {
-				res.redirect('/manager/profile/');
+				res.redirect('/manager');
 			} else {
-				res.redirect('/manager/profile/' + req.params.username);
+				res.redirect('/manager/profile');
 			}
 		});
+	} else {
+		res.send('password mismatch');
 	}
 });
 router.get('/view_Available', function (req, res) {

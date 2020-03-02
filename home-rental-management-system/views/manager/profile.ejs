@@ -10,7 +10,7 @@
 
 	<a href="/manager">Home</a>|
 	<a href="/logout">Logout</a><br><br>
-	<a href="/manager/profile/<%= user.username%>">Edit Profile</a><br>
+	<a href="/manager/profile">Edit Profile</a><br>
 	<a href="/manager/pendingCustomers">Pending Customer</a><br>
 	<a href="/manager/pendingHouseowners">Pending Houseowners </a><br>
 	<a href="/manager/view_Available">House to-let</a><br>
@@ -30,7 +30,7 @@
 			</tr>
 			<tr>
 				<td>Prefered Username: </td>
-				<td> <input type="text" name="uname" value="<%= user.username %>" required></td>
+				<td> <input type="text" name="uname" value="<%= user.username %>" readonly></td>
 			</tr>
 			<tr>
 				<td>Father's name: </td>
@@ -46,11 +46,11 @@
 			</tr>
 			<tr>
 				<td>Phone No: </td>
-				<td> <input type="text" name="nid" value="<%= user.phone %>" required></td>
+				<td> <input type="text" name="phone" value="<%= user.phone %>" required></td>
 			</tr>
 			<tr>
 				<td>National ID: </td>
-				<td> <input type="text" name="lname" value="<%= user.nid %>" required></td>
+				<td> <input type="text" name="nid" value="<%= user.nid %>" required></td>
 			</tr>
 			<tr>
 				<td>Password: </td>
