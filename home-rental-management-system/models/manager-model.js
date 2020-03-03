@@ -11,9 +11,19 @@ module.exports = {
 			}
 		});
 	},
-	getAll: function (callback) {
-		var sql = "select * from user";
-		db.getResults(sql, null, function (results) {
+	getAllPendingCustomer: function (callback) {
+		var sql = "select * from customerinfo where type=?";
+		db.getResults(sql, ['pending'], function (results) {
+			if (results.length > 0) {
+				callback(results);
+			} else {
+				callback([]);
+			}
+		});
+	},
+	getAllPendingHouseowner: function (callback) {
+		var sql = "select * from houseownerinfo where type=?";
+		db.getResults(sql, ['pending'], function (results) {
 			if (results.length > 0) {
 				callback(results);
 			} else {
@@ -51,7 +61,7 @@ module.exports = {
 			}
 		});
 	},
-	update: function (user, callback) {
+	updateProfile: function (user, callback) {
 		var sql = "update managerinfo set fname=?,lname=?, username=?, password=?, email=?,phone=?,area=?,fathersName=?,nid=? where username=?";
 		db.execute(sql, [user.fname, user.lname, user.username, user.password, user.email, user.phone, user.area, user.fathersName, user.nid, user.username], function (status) {
 			if (status) {
@@ -61,9 +71,20 @@ module.exports = {
 			}
 		});
 	},
-	delete: function (id, callback) {
-		var sql = "delete from user where id=?";
-		db.execute(sql, [id], function (status) {
+	acceptCustomer: function (username, callback) {
+
+		var sql = "update customerinfo set type=? where username=?";
+		db.execute(sql, ['available', username], function (status) {
+			if (status) {
+				callback(true);
+			} else {
+				callback(false);
+			}
+		});
+	},
+	deleteCustomer: function (username, callback) {
+		var sql = "delete from customerinfo where username=?";
+		db.execute(sql, [username], function (status) {
 			if (status) {
 				callback(true);
 			} else {

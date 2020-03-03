@@ -39,8 +39,7 @@ router.post('/profile', function (req, res) {
 			area: req.body.area
 		};
 
-		managerModel.update(user, function (status) {
-			console.log(user);
+		managerModel.updateProfile(user, function (status) {
 			if (status) {
 				res.redirect('/manager');
 			} else {
@@ -56,8 +55,50 @@ router.get('/view_Available', function (req, res) {
 
 });
 router.get('/pendingCustomers', function (req, res) {
-	res.render('manager/pendingCustomers');
+	managerModel.getAllPendingCustomer(function (results) {
+		if (results.length > 0) {
+			res.render('manager/pendingCustomers', {
+				userlist: results
+			});
+		} else {
+			res.render('manager/pendingCustomers', {
+				userlist: results
+			});
+		}
+	});
 
+});
+router.get('/pendingHouseowers', function (req, res) {
+	managerModel.getAllPendingCustomer(function (results) {
+		if (results.length > 0) {
+			res.render('manager/pendingCustomers', {
+				userlist: results
+			});
+		} else {
+			res.render('manager/pendingCustomers', {
+				userlist: results
+			});
+		}
+	});
+
+});
+router.get('/pendingCustomers/accept/:username', function (req, res) {
+	managerModel.acceptCustomer(req.params.username, function (status) {
+		if (status) {
+			res.redirect('/manager/pendingCustomers');
+		} else {
+			res.send('error');
+		}
+	});
+});
+router.get('/pendingCustomers/reject/:username', function (req, res) {
+	managerModel.deleteCustomer(req.params.username, function (status) {
+		if (status) {
+			res.redirect('/manager/pendingCustomers');
+		} else {
+			res.send('error');
+		}
+	});
 });
 router.get('/pendingHouseowners', function (req, res) {
 	res.render('manager/pendingHouseowners');

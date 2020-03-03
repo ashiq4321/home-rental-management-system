@@ -1,76 +1,75 @@
-var mysql      = require('mysql');
+var mysql = require('mysql');
 
-var getConnection = function( callback ){
+var getConnection = function (callback) {
 	var connection = mysql.createConnection({
-	  host     : '127.0.0.1',
-	  user     : 'root',
-	  password : '',
-	  database: 'home-rental-management-system'
+		host: '127.0.0.1',
+		user: 'root',
+		password: '',
+		database: 'home-rental-management-system'
 	});
 
-	connection.connect(function(err) {
-	  if (err) {
-	    console.error('error connecting: ' + err.stack);
-	    callback(null);
-	  }
-	  console.log('connected as id ' + connection.threadId);
-	  callback(connection);
+	connection.connect(function (err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			callback(null);
+		}
+		console.log('connected as id ' + connection.threadId);
+		callback(connection);
 	});
 };
 
 
-module.exports ={
-	getResults: function(sql, params, callback){
-		getConnection(function(connection){
-			if(params != null){
+module.exports = {
+	getResults: function (sql, params, callback) {
+		getConnection(function (connection) {
+			if (params != null) {
 				connection.query(sql, params, function (error, results) {
-					if(results.length != 0){
+					if (results.length != 0) {
 						callback(results);
-					}else{
+					} else {
+
+						console.log("caught");
 						callback([]);
 					}
 				});
-			}else{
+			} else {
 				connection.query(sql, function (error, results) {
-					if(results.length != 0){
+					if (results.length != 0) {
 						callback(results);
-					}else{
+					} else {
 						callback([]);
 					}
 				});
 			}
-			connection.end(function(err) {
+			connection.end(function (err) {
 				console.log('connection end!');
 			});
 		});
 	},
-	execute: function(sql,params,callback){
-		getConnection(function(connection){
+	execute: function (sql, params, callback) {
+		getConnection(function (connection) {
 
-			if(params != null){
+			if (params != null) {
 				connection.query(sql, params, function (error, status) {
-					if(status){
+					if (status) {
 						callback(true);
-					}else{
+					} else {
 						callback(false);
 					}
 				});
-			}else{
+			} else {
 				connection.query(sql, function (error, status) {
-					if(status){
+					if (status) {
 						callback(true);
-					}else{
+					} else {
 						callback(false);
 					}
 				});
 			}
-			connection.end(function(err) {
+			connection.end(function (err) {
 				console.log('connection end!');
 			});
 		});
 	}
 
 };
-
-
-
