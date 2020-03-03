@@ -91,5 +91,26 @@ module.exports = {
 				callback(false);
 			}
 		});
+	},
+	acceptHouseOwner: function (username, callback) {
+
+		var sql = "update houseownerinfo set type=? where username=?";
+		db.execute(sql, ['available', username], function (status) {
+			if (status) {
+				callback(true);
+			} else {
+				callback(false);
+			}
+		});
+	},
+	deleteHouseOwner: function (username, callback) {
+		var sql = "delete from houseownerinfo where username=?";
+		db.execute(sql, [username], function (status) {
+			if (status) {
+				callback(true);
+			} else {
+				callback(false);
+			}
+		});
 	}
 }

@@ -68,14 +68,14 @@ router.get('/pendingCustomers', function (req, res) {
 	});
 
 });
-router.get('/pendingHouseowers', function (req, res) {
-	managerModel.getAllPendingCustomer(function (results) {
+router.get('/pendingHouseowners', function (req, res) {
+	managerModel.getAllPendingHouseowner(function (results) {
 		if (results.length > 0) {
-			res.render('manager/pendingCustomers', {
+			res.render('manager/pendingHouseowners', {
 				userlist: results
 			});
 		} else {
-			res.render('manager/pendingCustomers', {
+			res.render('manager/pendingHouseowners', {
 				userlist: results
 			});
 		}
@@ -100,9 +100,23 @@ router.get('/pendingCustomers/reject/:username', function (req, res) {
 		}
 	});
 });
-router.get('/pendingHouseowners', function (req, res) {
-	res.render('manager/pendingHouseowners');
-
+router.get('/pendingHouseowners/accept/:username', function (req, res) {
+	managerModel.acceptHouseOwner(req.params.username, function (status) {
+		if (status) {
+			res.redirect('/manager/pendingHouseowners');
+		} else {
+			res.send('error');
+		}
+	});
+});
+router.get('/pendingHouseowners/reject/:username', function (req, res) {
+	managerModel.deleteHouseOwner(req.params.username, function (status) {
+		if (status) {
+			res.redirect('/manager/pendingHouseowners');
+		} else {
+			res.send('error');
+		}
+	});
 });
 router.get('/view_Customers', function (req, res) {
 	res.render('manager/view_Customers');
