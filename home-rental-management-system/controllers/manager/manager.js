@@ -119,11 +119,31 @@ router.get('/pendingHouseowners/reject/:username', function (req, res) {
 	});
 });
 router.get('/view_Customers', function (req, res) {
-	res.render('manager/view_Customers');
+	managerModel.getAllAvailableCustomer(function (results) {
+		if (results.length > 0) {
+			res.render('manager/view_Customers', {
+				userlist: results
+			});
+		} else {
+			res.render('manager/view_Customers', {
+				userlist: results
+			});
+		}
+	});
 
 });
 router.get('/view_Owners', function (req, res) {
-	res.render('manager/view_Owners');
+	managerModel.getAllAvailableHouseowner(function (results) {
+		if (results.length > 0) {
+			res.render('manager/view_Owners', {
+				userlist: results
+			});
+		} else {
+			res.render('manager/view_Owners', {
+				userlist: results
+			});
+		}
+	});
 
 });
 router.get('/view_Rented', function (req, res) {

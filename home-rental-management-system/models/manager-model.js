@@ -31,6 +31,26 @@ module.exports = {
 			}
 		});
 	},
+	getAllAvailableHouseowner: function (callback) {
+		var sql = "select * from houseownerinfo where type=?";
+		db.getResults(sql, ['available'], function (results) {
+			if (results.length > 0) {
+				callback(results);
+			} else {
+				callback([]);
+			}
+		});
+	},
+	getAllAvailableCustomer: function (callback) {
+		var sql = "select * from customerinfo where type=?";
+		db.getResults(sql, ['available'], function (results) {
+			if (results.length > 0) {
+				callback(results);
+			} else {
+				callback([]);
+			}
+		});
+	},
 	validate: function (user, callback) {
 		var sql = "SELECT * FROM managerinfo where username=? and password=?";
 		db.getResults(sql, [user.username, user.password], function (results) {
