@@ -146,6 +146,81 @@ router.get('/view_Owners', function (req, res) {
 	});
 
 });
+router.get('/view_Customers/:username', function (req, res) {
+	managerModel.getCutomerProfile(req.params.username, function (result) {
+		res.render('manager/getProfile', {
+			user: result,
+			table: 'customerinfo'
+		});
+	});
+
+});
+router.get('/view_Owners/:username', function (req, res) {
+	managerModel.getOwnersProfile(req.params.username, function (result) {
+		res.render('manager/getProfile', {
+			user: result,
+			table: 'houseownerinfo'
+		});
+	});
+
+});
+//block unblock
+router.get('/houseownerinfo/:username', function (req, res) {
+	managerModel.getOwnersProfile(req.params.username, function (result) {
+		if (result.status == "block") {
+			var user = {
+				username: req.params.username,
+				status: 'unblock'
+			};
+		} else {
+			var user = {
+				username: req.params.username,
+				status: 'block'
+			};
+		}
+		managerModel.houseOwnersStatus(user, function (status) {
+			if (status) {
+				managerModel.getOwnersProfile(req.params.username, function (result) {
+					res.render('manager/getProfile', {
+						user: result,
+						table: 'houseownerinfo'
+					});
+				});
+			} else {
+				res.send('error');
+			}
+		});
+
+	});
+});
+router.get('/customerinfo/:username', function (req, res) {
+	managerModel.getCutomerProfile(req.params.username, function (result) {
+		if (result.status == "block") {
+			var user = {
+				username: req.params.username,
+				status: 'unblock'
+			};
+		} else {
+			var user = {
+				username: req.params.username,
+				status: 'block'
+			};
+		}
+		managerModel.customerStatus(user, function (status) {
+			if (status) {
+				managerModel.getCutomerProfile(req.params.username, function (result) {
+					res.render('manager/getProfile', {
+						user: result,
+						table: 'customerinfo'
+					});
+				});
+			} else {
+				res.send('error');
+			}
+		});
+
+	});
+});
 router.get('/view_Rented', function (req, res) {
 	res.render('manager/view_Rented');
 

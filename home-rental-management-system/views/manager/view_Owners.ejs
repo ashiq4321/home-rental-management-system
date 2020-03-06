@@ -28,6 +28,8 @@
 			<td>Email</td>
 			<td>Phone</td>
 			<td>Nid</td>
+			<td>No of report</td>
+			<td>status</td>
 		</tr>
 		<% for(var i=0; i < userlist.length; i++){ %>
 		<tr>
@@ -37,9 +39,10 @@
 			<td><%= userlist[i].email %></td>
 			<td><%= userlist[i].phone %></td>
 			<td><%= userlist[i].nid %></td>
+			<td><%= userlist[i].reportNo %></td>
+			<td><%= userlist[i].status %></td>
 			<td>
-				<a href="/manager/view_Owners/tempBlock/<%= userlist[i].username %>">Temporary Block</a> |
-				<a href="/manager/view_Owners/permanentBlock/<%= userlist[i].username %>">Parmanent Block </a>
+				<a href="/manager/view_Owners/<%= userlist[i].username %>">View Profile </a>
 			</td>
 		</tr>
 		<%  } %>

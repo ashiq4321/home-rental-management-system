@@ -1,9 +1,19 @@
 var db = require('./db');
 
 module.exports = {
-	getById: function (id, callback) {
-		var sql = "select * from user where id=?";
-		db.getResults(sql, [id], function (results) {
+	getCutomerProfile: function (username, callback) {
+		var sql = "select * from customerinfo where username=?";
+		db.getResults(sql, username, function (results) {
+			if (results.length > 0) {
+				callback(results[0]);
+			} else {
+				callback(null);
+			}
+		});
+	},
+	getOwnersProfile: function (username, callback) {
+		var sql = "select * from houseownerinfo where username=?";
+		db.getResults(sql, username, function (results) {
 			if (results.length > 0) {
 				callback(results[0]);
 			} else {
@@ -126,6 +136,26 @@ module.exports = {
 	deleteHouseOwner: function (username, callback) {
 		var sql = "delete from houseownerinfo where username=?";
 		db.execute(sql, [username], function (status) {
+			if (status) {
+				callback(true);
+			} else {
+				callback(false);
+			}
+		});
+	},
+	houseOwnersStatus: function (user, callback) {
+		var sql = "update houseownerinfo set status=? where username=?";
+		db.execute(sql, [user.status, user.username], function (status) {
+			if (status) {
+				callback(true);
+			} else {
+				callback(false);
+			}
+		});
+	},
+	customerStatus: function (user, callback) {
+		var sql = "update customerinfo set status=? where username=?";
+		db.execute(sql, [user.status, user.username], function (status) {
 			if (status) {
 				callback(true);
 			} else {
