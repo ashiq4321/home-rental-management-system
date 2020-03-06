@@ -27,8 +27,6 @@ module.exports = {
 					if (results.length != 0) {
 						callback(results);
 					} else {
-
-						console.log("caught");
 						callback([]);
 					}
 				});

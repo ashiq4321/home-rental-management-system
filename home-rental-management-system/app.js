@@ -2,7 +2,6 @@
 var express = require('express');
 var login = require('./controllers/login');
 var logout = require('./controllers/logout');
-var home = require('./controllers/home');
 var signup = require('./controllers/signup');
 var admin = require('./controllers/admin/admin');
 var manager = require('./controllers/manager/manager');

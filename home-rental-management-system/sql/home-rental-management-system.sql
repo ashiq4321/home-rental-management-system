@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2020 at 10:41 AM
+-- Generation Time: Mar 06, 2020 at 09:43 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.27
 
@@ -21,6 +21,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `home-rental-management-system`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admininfo`
+--
+
+CREATE TABLE `admininfo` (
+  `name` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admininfo`
+--
+
+INSERT INTO `admininfo` (`name`, `username`, `password`, `email`, `phone`) VALUES
+('ashiq', 'admin', 'admin', 'email', 21548);
 
 -- --------------------------------------------------------
 
@@ -47,7 +68,33 @@ CREATE TABLE `customerinfo` (
 --
 
 INSERT INTO `customerinfo` (`fname`, `lname`, `username`, `password`, `email`, `phone`, `type`, `fathersName`, `nid`, `reportNo`, `status`) VALUES
-('Ashiqul Hoque', 'chowdhury', 'what', 'what', 'ehat', '0356', 'available', 'adhgja', 'sdfds', 0, '');
+('Ashiqul Hoque', 'chowdhury', 'what', 'what', 'ehat', '0356', 'available', 'adhgja', 'sdfds', 0, 'unblock');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `houseinfo`
+--
+
+CREATE TABLE `houseinfo` (
+  `houseid` int(10) NOT NULL,
+  `housename` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `division` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `area` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `size` int(10) NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prize` int(10) NOT NULL,
+  `review` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `houseinfo`
+--
+
+INSERT INTO `houseinfo` (`houseid`, `housename`, `division`, `area`, `address`, `size`, `description`, `prize`, `review`, `status`) VALUES
+(2, 'ad', 'ddfdfdffdfff', 'dfdf', 'dfdfdf', 322, 'asas', 2365, 'asdkjdbkadjda,askjdsjkda,ldhdalsd', 'rented');
 
 -- --------------------------------------------------------
 
@@ -74,7 +121,7 @@ CREATE TABLE `houseownerinfo` (
 --
 
 INSERT INTO `houseownerinfo` (`fname`, `lname`, `username`, `password`, `email`, `phone`, `type`, `fathersName`, `nid`, `reportNo`, `status`) VALUES
-('dfdf', 'df', 'fdf', 'dff', 'df', 'df', 'available', 'sa', 'sa', 0, ''),
+('dfdf', 'df', 'fdf', 'dff', 'df', 'df', 'available', 'sa', 'sa', 0, 'unblock'),
 ('as', 'sa', 'sa', 'sa', 'sa', 'sa', 'pending', 'sa', 'sa', 0, '');
 
 -- --------------------------------------------------------
@@ -90,7 +137,8 @@ CREATE TABLE `managerinfo` (
   `password` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` int(20) NOT NULL,
-  `area` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `division` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `area` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fathersName` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nid` int(20) NOT NULL,
   `status` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -100,12 +148,19 @@ CREATE TABLE `managerinfo` (
 -- Dumping data for table `managerinfo`
 --
 
-INSERT INTO `managerinfo` (`fname`, `lname`, `username`, `password`, `email`, `phone`, `area`, `fathersName`, `nid`, `status`) VALUES
-('Ashiqul Hoque', 'chowdhury', 'ashiq4321', 'ashiq4321', 'ashiqulhoque45@gmail.com', 1823828500, 'bashundhara', 'shafiqul hoque chowdhury', 1670464084, '');
+INSERT INTO `managerinfo` (`fname`, `lname`, `username`, `password`, `email`, `phone`, `division`, `area`, `fathersName`, `nid`, `status`) VALUES
+('Ashiqul Hoque', 'chowdhury', 'as', 'new', 'ashiqulhoque45@gmail.com', 1670464084, NULL, NULL, 'something', 16704, 'block'),
+('Ashiqul Hoque', 'chowdhury', 'ashiq4321', 'ashiq4321', 'ashiqulhoque45@gmail.com', 1823828500, 'Dhaka', 'bashundhara', 'shafiqul hoque chowdhury', 1670464084, '');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admininfo`
+--
+ALTER TABLE `admininfo`
+  ADD PRIMARY KEY (`username`);
 
 --
 -- Indexes for table `customerinfo`
@@ -113,6 +168,12 @@ INSERT INTO `managerinfo` (`fname`, `lname`, `username`, `password`, `email`, `p
 ALTER TABLE `customerinfo`
   ADD PRIMARY KEY (`username`),
   ADD UNIQUE KEY `nid` (`nid`);
+
+--
+-- Indexes for table `houseinfo`
+--
+ALTER TABLE `houseinfo`
+  ADD PRIMARY KEY (`houseid`);
 
 --
 -- Indexes for table `houseownerinfo`

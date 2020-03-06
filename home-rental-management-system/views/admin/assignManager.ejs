@@ -1,29 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Assign Manager</title>
 </head>
+
 <body>
 	<h2>Assign Manager</h2>
-	
+
 	<a href="/home">home</a>|
 	<a href="/logout">Logout</a><br><br>
 	<a href="/admin/profile">Edit Profile</a><br>
 	<a href="/admin/addNewManager">Add New Manager</a><br>
 	<a href="/admin/assignManager">Assign Manager </a><br>
-	<a href="/admin/changeManager">Change Assigned Manager</a><br>
 	<a href="/admin/view_Managers">Managers</a><br>
 	<a href="/admin/view_Owners">Owners</a><br>
 	<a href="/admin/view_Customers">Customers</a><br>
 	<a href="/admin/view_Rented">Rented Apartments</a><br>
-	<a href="/admin/view_Available">Available Apartments</a><br>
+	<a href="/admin/view_Available">Available Apartments</a><br><br>
 
 	<form method="post">
-		Username: <input type="text" name="uname"><br><br>
-		Area   : <input type="text" name="area"><br><br>
-		
-		<input type="Submit" name="" value="Submit"> <br>
-		
+		<table border="1">
+			<tr>
+				<td>
+					Username:
+				</td>
+				<td>
+					<select name="username">
+						<% for(var i=0; i < userlist.length; i++){ %>
+						<option value="<%= userlist[i].username %>"><%= userlist[i].username %></option>
+						<% }%>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td> Division :
+				</td>
+				<td>
+					<script>
+						function random_function() {
+							var a = document.getElementById("Area").value;
+							if (a === "Chittagong") {
+								var arr = ["Agrabad", "Chandgaon R/A", "Chawkbazar", "Anderkilla", "GEC", "Khulshi"];
+							} else if (a === "Dhaka") {
+								var arr = ["Bashundhara R/A", "Dhanmondi R/A", "Banani", "Uttara", "Mirpur", "Nikunja"];
+							} else if (a === "Khulna") {
+								var arr = ["Bashundhara R/A", "Dhanmondi R/A", "Banani", "Uttara", "Mirpur", "Nikunja"];
+							}
+							var string = "";
+
+							for (i = 0; i < arr.length; i++) {
+								string = string + "<option value=" + arr[i] + ">" + arr[i] + "</option>";
+							}
+							document.getElementById("output").innerHTML = string;
+						}
+					</script>
+					<select id="Area" name="division" onchange="random_function()">
+						<option value="">select option</option>
+						<option value="Chittagong">Chittagong</option>
+						<option value="Dhaka">Dhaka</option>
+					</select>
+
+					<div>
+						<select id="output" name="area" value="output" onchange="random_function1()">
+					</div>
+				</td>
+			</tr>
+		</table>
+		<input type="Submit" name="" value="Submit">
 	</form>
 </body>
+
 </html>

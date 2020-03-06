@@ -2,14 +2,11 @@
 <html>
 
 <head>
-	<title>Admin Page</title>
+	<title>Admin page</title>
 </head>
 
 <body>
-	<div>
-		<h2>Welcome home,<%= user.username%></h2>
-	</div>
-
+	<a href="/admin">Home</a>|
 	<a href="/logout">Logout</a><br><br>
 	<a href="/admin/profile">Edit Profile</a><br>
 	<a href="/admin/addNewManager">Add New Manager</a><br>
@@ -19,12 +16,22 @@
 	<a href="/admin/view_Customers">Customers</a><br>
 	<a href="/admin/view_Rented">Rented Apartments</a><br>
 	<a href="/admin/view_Available">Available Apartments</a><br>
-
-	Name: <%= user.name %> <br>
-	UserName: <%= user.username %> <br>
+	<%= user.username %><br>
+	<a href="/admin/view_Rented">Message</a>|
+	<% if(user.status=="block"){ %>
+	<a href="/admin/<%= table%>/<%= user.username %>">Unblock</a>
+	<%  } else{ %>
+	<a href="/admin/<%= table%>/<%= user.username %>">Block</a>
+	<%  }%>
+	<h1>Profile information</h1>
+	First Name: <%= user.fname %> <br>
+	Last Name: <%= user.lname %> <br>
+	Father's Name: <%= user.fathersName %> <br>
+	Assigned Division: <%= user.division %> <br>
+	Assigned Area: <%= user.area %> <br>
 	Email: <%= user.email %> <br>
 	phone: <%= user.phone %> <br>
-	Password: <%= user.password %> <br>
+	National ID: <%= user.nid %> <br>
 </body>
 
 </html>

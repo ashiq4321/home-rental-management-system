@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Managers</title>
 </head>
+
 <body>
 	<div>
-			<h2>Managers</h2> 		
+		<h2>Managers</h2>
 	</div>
 
-	<a href="/home">Back</a>|
+	<a href="/admin">Back</a>|
 	<a href="/logout">Logout</a><br><br>
 	<a href="/admin/profile">Edit Profile</a><br>
 	<a href="/admin/addNewManager">Add New Manager</a><br>
 	<a href="/admin/assignManager">Assign Manager </a><br>
-	<a href="/admin/changeManager">Change Assigned Manager</a><br>
 	<a href="/admin/view_Managers">Managers</a><br>
 	<a href="/admin/view_Owners">Owners</a><br>
 	<a href="/admin/view_Customers">Customers</a><br>
@@ -22,30 +23,34 @@
 
 	<table border="1">
 		<tr>
-			<td>ID</td>
+			<td>First Name</td>
+			<td>Last Name</td>
 			<td>USERNAME</td>
+			<td>Email</td>
+			<td>Phone</td>
+			<td>Division</td>
 			<td>Area</td>
-			<td>Area Code</td>
+			<td>Nid</td>
+			<td>status</td>
 		</tr>
-		
+		<% for(var i=0; i < userlist.length; i++){ %>
 		<tr>
-			<td>1</td>
-			<td>Musaddiq</td>
-			<td>Bashundhara R/A</td>
-			<td>1200</td>
+			<td><%= userlist[i].fname %></td>
+			<td><%= userlist[i].lname %></td>
+			<td><%= userlist[i].username %></td>
+			<td><%= userlist[i].email %></td>
+			<td><%= userlist[i].phone %></td>
+			<td><%= userlist[i].division %></td>
+			<td><%= userlist[i].area %></td>
+			<td><%= userlist[i].nid %></td>
+			<td><%= userlist[i].status %></td>
+			<td>
+				<a href="/admin/view_Managers/<%= userlist[i].username %>">View Profile </a>
+			</td>
 		</tr>
-		
-		<tr>
-			<td>2</td>
-			<td>Musa</td>
-			<td>Nikunjo</td>
-			<td>1201</td>
-		</tr>
-		
-		
-		
-		
+		<%  } %>
 	</table>
 
 </body>
+
 </html>

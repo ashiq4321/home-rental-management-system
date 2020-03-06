@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Add New Manager</title>
 </head>
+
 <body>
 	<h2>Add New Manager</h2>
-	
-	<a href="/home">Back</a>|
+	<a href="/admin">Home</a> |
 	<a href="/logout">Logout</a><br><br>
 	<a href="/admin/profile">Edit Profile</a><br>
 	<a href="/admin/addNewManager">Add New Manager</a><br>
 	<a href="/admin/assignManager">Assign Manager </a><br>
-	<a href="/admin/changeManager">Change Assigned Manager</a><br>
 	<a href="/admin/view_Managers">Managers</a><br>
 	<a href="/admin/view_Owners">Owners</a><br>
 	<a href="/admin/view_Customers">Customers</a><br>
@@ -19,19 +19,64 @@
 	<a href="/admin/view_Available">Available Apartments</a><br>
 
 	<form method="post">
-	    First Name: <input type="text" name="fname"required><br><br>
-		Last Name: <input type="text" name="lname"required><br><br>
-		Username: <input type="text" name="uname"required><br><br>
-		Password: <input type="password" name="password"required><br><br>
-		Email   : <input type="text" name="email"required><br><br>
-		Phone : <input type="text" name="phone"required><br><br>
-		Area : <input type="text" name="area"required><br><br>
-		For security question : Father's name: 
-		<input type="text" name="fathersName"required><br><br>
-		National ID: <input type="text" name="nid"required><br><br>
-		
+		<table border="1">
+			<tr>
+				<td>
+					First Name:
+				</td>
+				<td><input type="text" name="fname" value="<%= user.fname %>" required></td>
+			</tr>
+
+			<tr>
+				<td>
+					Last Name:
+				</td>
+				<td><input type="text" name="lname" value="<%= user.lname %>" required></td>
+			<tr>
+				<td>
+					Username:
+				</td>
+				<td> <input type="text" name="uname" value="<%= user.username %>" required></td>
+			</tr>
+			<tr>
+				<td>
+					Email :
+				</td>
+				<td><input type="text" name="email" value="<%= user.email %>" required></td>
+
+			<tr>
+				<td>
+					Phone :
+				</td>
+				<td><input type="text" name="phone" value="<%= user.phone %>" required></td>
+			<tr>
+				<td>
+					For security question : Father's name:
+				</td>
+				<td><input type="text" name="fathersName" value="<%= user.fathersName %>" required></td>
+			<tr>
+				<td>
+					National ID:
+				</td>
+				<td><input type="text" name="nid" value="<%= user.nid %>" required></td>
+			<tr>
+				<td>
+					Password:
+				</td>
+				<td><input type="password" name="password" required></td>
+			</tr>
+			<tr>
+				<td>
+					Confirm Password:
+				</td>
+				<td><input type="password" name="cpassword" required></td>
+			</tr>
+
+		</table>
+
 		<input type="Submit" name="" value="Submit"><br>
-		
+
 	</form>
 </body>
+
 </html>
