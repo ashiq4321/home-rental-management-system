@@ -61,6 +61,27 @@ module.exports = {
 			}
 		});
 	},
+	getAllAvailableHouse: function (callback) {
+		var sql = "select * from houseinfo where status=?";
+		db.getResults(sql, ['available'], function (results) {
+			console.log("caught");
+			if (results.length > 0) {
+				callback(results);
+			} else {
+				callback([]);
+			}
+		});
+	},
+	getAllRentedHouse: function (callback) {
+		var sql = "select * from houseinfo where status=?";
+		db.getResults(sql, ['rented'], function (results) {
+			if (results.length > 0) {
+				callback(results);
+			} else {
+				callback([]);
+			}
+		});
+	},
 	validate: function (user, callback) {
 		var sql = "SELECT * FROM managerinfo where username=? and password=?";
 		db.getResults(sql, [user.username, user.password], function (results) {
@@ -78,16 +99,6 @@ module.exports = {
 				callback(results[0]);
 			} else {
 				callback(null);
-			}
-		});
-	},
-	insert: function (user, callback) {
-		var sql = "insert into user values(?,?,?,?)";
-		db.execute(sql, [null, user.username, user.password, user.type], function (status) {
-			if (status) {
-				callback(true);
-			} else {
-				callback(false);
 			}
 		});
 	},
@@ -115,6 +126,17 @@ module.exports = {
 	deleteCustomer: function (username, callback) {
 		var sql = "delete from customerinfo where username=?";
 		db.execute(sql, [username], function (status) {
+			if (status) {
+				callback(true);
+			} else {
+				callback(false);
+			}
+		});
+	},
+
+	deleteHouse: function (id, callback) {
+		var sql = "delete from houseinfo where houseid=?";
+		db.execute(sql, [id], function (status) {
 			if (status) {
 				callback(true);
 			} else {

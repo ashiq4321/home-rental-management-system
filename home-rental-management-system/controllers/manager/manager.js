@@ -50,10 +50,6 @@ router.post('/profile', function (req, res) {
 		res.send('password mismatch');
 	}
 });
-router.get('/view_Available', function (req, res) {
-	res.render('manager/view_Available');
-
-});
 router.get('/pendingCustomers', function (req, res) {
 	managerModel.getAllPendingCustomer(function (results) {
 		if (results.length > 0) {
@@ -222,8 +218,49 @@ router.get('/customerinfo/:username', function (req, res) {
 	});
 });
 router.get('/view_Rented', function (req, res) {
-	res.render('manager/view_Rented');
+	managerModel.getAllRentedHouse(function (results) {
+		if (results.length > 0) {
+			res.render('manager/view_Rented', {
+				userlist: results
+			});
+		} else {
+			res.render('manager/view_Rented', {
+				userlist: results
+			});
+		}
+	});
 
 });
+router.get('/view_Available', function (req, res) {
+	managerModel.getAllAvailableHouse(function (results) {
+		if (results.length > 0) {
+			res.render('manager/view_Available', {
+				userlist: results
+			});
+		} else {
+			res.render('manager/view_Available', {
+				userlist: results
+			});
+		}
+	});
 
+});
+router.get('/view_Rented/:id', function (req, res) {
+	managerModel.deleteHouse(req.params.id, function (status) {
+		if (status) {
+			res.redirect('/manager/view_Rented');
+		} else {
+			res.send('error');
+		}
+	});
+});
+router.get('/view_Available/:id', function (req, res) {
+	managerModel.deleteHouse(req.params.id, function (status) {
+		if (status) {
+			res.redirect('/manager/view_Available');
+		} else {
+			res.send('error');
+		}
+	});
+});
 module.exports = router;
