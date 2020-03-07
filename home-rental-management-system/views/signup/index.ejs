@@ -13,14 +13,23 @@
 			<tr>
 				<td>First Name: </td>
 				<td><input type="text" name="fname" value="<%= user.fname %>" required></td>
+				<% if(error.fname!= null){ %>
+				<td><%= error.fname.msg %></td>
+				<% } %>
 			</tr>
 			<tr>
 				<td>Last Name: </td>
 				<td> <input type="text" name="lname" value="<%= user.lname %>" required></td>
+				<% if(error.lname!= null){ %>
+				<td><%= error.lname.msg %></td>
+				<% } %>
 			</tr>
 			<tr>
 				<td>Prefered Username: </td>
 				<td> <input type="text" name="uname" value="<%= user.uname %>" required></td>
+				<% if(error.uname!= null){ %>
+				<td><%= error.uname.msg %></td>
+				<% } %>
 			</tr>
 			<tr>
 				<td>usertype:</td>
@@ -30,30 +39,52 @@
 						<option value="Customer">Customer</option>
 					</select>
 				</td>
+				<% if(error.usertype!= null){ %>
+				<td><%= error.usertype.msg %></td>
+				<% } %>
 			</tr><br>
 			<tr>
 				<td>Father's Name: </td>
 				<td> <input type="text" name="fathersName" value="<%= user.fathersName %>" required></td>
+				<% if(error.fathersName!= null){ %>
+				<td><%= error.fathersName.msg %></td>
+				<% } %>
 			</tr>
 			<tr>
 				<td>Mail: </td>
 				<td> <input type="text" name="email" value="<%= user.email %>" required></td>
+				<% if(error.email!= null){ %>
+				<td><%= error.email.msg %></td>
+				<% } %>
 			</tr>
 			<tr>
 				<td>Phone No: </td>
 				<td> <input type="text" name="phone" value="<%= user.phone %>" required></td>
+				<% if(error.phone!= null){ %>
+				<td><%= error.phone.msg %></td>
+				<% } %>
 			</tr>
 			<tr>
 				<td>National ID: </td>
 				<td> <input type="text" name="nid" value="<%= user.nid %>" required></td>
+				<% if(error.nid!= null){ %>
+				<td><%= error.nid.msg %></td>
+				<% } %>
 			</tr>
 			<tr>
 				<td>Password: </td>
-				<td> <input type="password" name="password" required></td>
+				<td> <input type="password" name="password" value="<%= user.password %>" required></td>
+				<% if(error.password!= null){ %>
+				<td><%= error.password.msg %></td>
+				<% } %>
+
 			</tr>
 			<tr>
 				<td>Confirm Password:</td>
-				<td> <input type="password" name="cpassword" required></td>
+				<td> <input type="password" name="cpassword" value="<%= user.cpassword %>" required></td>
+				<% if(error.cpassword!= null){ %>
+				<td><%= error.cpassword.msg %></td>
+				<% } %>
 			</tr>
 		</table>
 		<input type="submit" name="" value="Submit">

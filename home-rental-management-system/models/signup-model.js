@@ -6,7 +6,6 @@ module.exports = {
 			var sql = "insert into houseownerinfo values(?,?,?,?,?,?,?,?,?,?,?)";
 			db.execute(sql, [user.fname, user.lname, user.uname, user.password, user.email, user.phone, 'pending', user.fathersName, user.nid, 0, 'unblock'], function (status) {
 				if (status) {
-					console.log(user);
 					callback(true);
 				} else {
 					callback(false);
