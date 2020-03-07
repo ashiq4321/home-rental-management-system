@@ -12,7 +12,6 @@ var bodyParser = require('body-parser');
 var app = express();
 var cookieParser = require('cookie-parser');
 
-
 //configuration
 app.set('view engine', 'ejs');
 
